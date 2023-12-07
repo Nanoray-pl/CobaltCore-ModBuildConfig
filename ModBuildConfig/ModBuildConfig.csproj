@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Shockah.CobaltCoreModBuildConfig</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>Shockah.CobaltCoreModBuildConfig</PackageId>
+    <Company>Nanoray</Company>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Shockah/CobaltCore-ModBuildConfig</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Shockah/CobaltCore-ModBuildConfig</PackageProjectUrl>
+    <PackageTags>cobalt-core mod-build-config</PackageTags>
+    <Authors>Shockah</Authors>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.0.6</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>A package helping with creating, debugging and publishing of Cobalt Core mods.</Description>
+    <Copyright>Shockah</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\README.md" Pack="True" PackagePath="\" />
+    <None Include="..\LICENSE" Pack="True" PackagePath="\" />
+    <None PackagePath="build/Shockah.CobaltCoreModBuildConfig.dll" Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" Visible="false" />
+    <None PackagePath="build/Shockah.CobaltCoreModBuildConfig.targets" Include="build\package.targets" Pack="true" />
+  </ItemGroup>
+</Project>
