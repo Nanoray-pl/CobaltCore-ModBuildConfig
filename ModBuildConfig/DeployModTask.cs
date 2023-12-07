@@ -1,10 +1,10 @@
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace Shockah.CobaltCoreModBuildConfig;
 
@@ -34,7 +34,7 @@ public class DeployModTask : Task
     [Required]
     public string ModZipPath { get; set; } = null!;
 
-    public string IncludedProjectPaths { get; set; } = "";
+    public string IncludedModProjectPaths { get; set; } = "";
 
     public override bool Execute()
     {
@@ -69,20 +69,24 @@ public class DeployModTask : Task
         foreach (var file in GetAllFilesFromDirectory(new(targetDir)))
             yield return file;
 
-        foreach (string includedProjectPath in IncludedProjectPaths.Split(';'))
+        IncludedModProjectPaths = IncludedModProjectPaths.Trim();
+        if (IncludedModProjectPaths != "")
         {
-            string path = Path.Combine(projectDir, includedProjectPath);
-            if (File.Exists(path))
+            foreach (string includedProjectPath in IncludedModProjectPaths.Split(';'))
             {
-                Uri fileUri = new(path);
-                string relativeName = projectDirUri.MakeRelativeUri(fileUri).OriginalString;
-                yield return (new FileInfo(path), relativeName);
-            }
-            else if (Directory.Exists(path))
-            {
-                DirectoryInfo dirInfo = new(path);
-                foreach (var file in GetAllFilesFromDirectory(dirInfo))
-                    yield return file;
+                string path = Path.Combine(projectDir, includedProjectPath);
+                if (Directory.Exists(path))
+                {
+                    DirectoryInfo dirInfo = new(path);
+                    foreach (var file in GetAllFilesFromDirectory(dirInfo))
+                        yield return file;
+                }
+                else if (File.Exists(path))
+                {
+                    Uri fileUri = new(path);
+                    string relativeName = projectDirUri.MakeRelativeUri(fileUri).OriginalString;
+                    yield return (new FileInfo(path), relativeName);
+                }
             }
         }
     }
