@@ -1,0 +1,1 @@
+# CobaltCore-ModBuildConfig
