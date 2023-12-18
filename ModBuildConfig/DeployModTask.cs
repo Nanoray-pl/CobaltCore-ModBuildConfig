@@ -8,7 +8,7 @@ using Microsoft.Build.Utilities;
 
 namespace Shockah.CobaltCoreModBuildConfig;
 
-public class DeployModTask : Task
+public sealed class DeployModTask : Task
 {
     [Required]
     public string ModName { get; set; } = null!;

@@ -21,12 +21,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.10" />
+    <PackageReference Include="SingleFileExtractor.Core" Version="2.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
   </ItemGroup>
@@ -35,6 +37,7 @@
     <None Include="..\README.md" Pack="True" PackagePath="\" />
     <None Include="..\LICENSE" Pack="True" PackagePath="\" />
     <None PackagePath="build\Shockah.CobaltCoreModBuildConfig.dll" Include="$(OutputPath)\$(AssemblyName).dll" Pack="True" Visible="True" />
+    <None PackagePath="build\SingleFileExtractor.Core.dll" Include="$(OutputPath)\SingleFileExtractor.Core.dll" Pack="True" Visible="True" />
     <None PackagePath="build\Shockah.CobaltCoreModBuildConfig.targets" Include="build\package.targets" Pack="True" />
   </ItemGroup>
 </Project>
